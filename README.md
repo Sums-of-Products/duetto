@@ -1,5 +1,5 @@
 # Duetto
-Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet sampling** to draw from the posterior distribution of **directed acyclic graphs (DAGs)**. The underlying framework and moves are introduced in **Generalizing Metropolis--Hastings for Sampling DAGs**.
+Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet sampling** to draw from the posterior distribution of **directed acyclic graphs (DAGs)**. The underlying framework and moves are introduced in **Generalizing Metropolis—Hastings for Sampling DAGs**.
 
 ## Algorithm Overview
 Duetto implements three move types
