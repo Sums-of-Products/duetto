@@ -213,7 +213,7 @@ int main(int argc, char* argv[]) {
               << "Burn-in:          " << burnin << "\n"
               << "Mid 1:            " << mid1 << "\n"
               << "Mid 2:            " << mid2 << "\n"
-              << "Max candidates:   " << maxcan << "\n"
+              << "Top candidates:   " << maxcan << "\n"
               << "Prior:            " << prior << "\n"
               << "Prune error:      " << er << "\n"
               << "Prune type:       " << prune << "\n"
