@@ -9,7 +9,7 @@ Duetto implements four moves:
 - **Ancestor-constrained move (AC):** Adds, removes, or reverses an ancestor relationship while resampling parent sets at its endpoints.
 - **[Blocked Gibbs sampling](https://www.jmlr.org/papers/v17/14-486.html) (BG):** standard Gibbs sampling (no duet sampling)
 
-The **score-pruning** technique, introduced in **[Scaling Up Bayesian DAG Sampling](https://proceedings.mlr.press/v337/nikzad26a.html)** (Nikzad et al.) can be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
+The **score-pruning** technique, introduced in **[Scaling Up Bayesian DAG Sampling](https://proceedings.mlr.press/v337/nikzad26a.html)** (Nikzad et al., 2026) can be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
 
 ## Compilation and Execution
 
