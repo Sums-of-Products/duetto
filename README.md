@@ -28,7 +28,7 @@ Another option is to provide a local scores file in `.jkl` format. The `.jkl` ex
 For example, run:
 
 ```bash
-./gibby  ./data/asia1k.dat 
+./gibby  ./data/asia10k.dat 
 ```
 
 The datasets and score files used in the experiments are located in the `data` folder.
