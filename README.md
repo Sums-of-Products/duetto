@@ -5,9 +5,9 @@ Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet samp
 Duetto implements three move types
 
 - **Unconstrained Sequential Resampling (USR):** Sequentially resamples parent sets following the order given by a node permutation.  
-- **Edge-constrained move(EC):** Adds, removes, or reverses an edge while resampling parent sets at its endpoints.
-- **Ancestor-constrained move(AC):** Adds, removes, or reverses an ancestor relationship while resampling parent sets at its endpoints.
-- **Blocked Gibbs sampling(BG)** (no duet sampling here) 
+- **Edge-constrained move (EC):** Adds, removes, or reverses an edge while resampling parent sets at its endpoints.
+- **Ancestor-constrained move (AC):** Adds, removes, or reverses an ancestor relationship while resampling parent sets at its endpoints.
+- **[Blocked Gibbs sampling](https://www.jmlr.org/papers/v17/14-486.html) (BG)** (no duet sampling here) 
 
 A **score-pruning technique** can optionally be enabled to discard low-probability parent sets during local score computation, improving scalability and memory efficiency.
 
