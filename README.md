@@ -2,7 +2,7 @@
 Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet sampling** to draw from the posterior distribution of **directed acyclic graphs (DAGs)**. The underlying framework and moves are introduced in **Generalizing Metropolis—Hastings for Sampling DAGs**.
 
 ## Algorithm Overview
-Duetto implements three move types
+Duetto implements four moves:
 
 - **Unconstrained Sequential Resampling (USR):** Sequentially resamples parent sets following the order given by a node permutation.  
 - **Edge-constrained move (EC):** Adds, removes, or reverses an edge while resampling parent sets at its endpoints.
