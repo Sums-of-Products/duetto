@@ -46,7 +46,7 @@ Duetto computes scores only from discrete data using BDeu (ESS=1). We recommend 
 | `-a` | Number of significant bits in approximations | `10` |
 | `-R` | Seed for random number generator | random |
 | `-i` | Number of main iterations | `10 000` |
-| `-burnin` | Number of burn-in iterations | `i / 10` |
+| `-burnin` | Number of burn-in iterations | $\floor i / 10 \rfloor$ |
 | `-q` | Block size | $\min(\lfloor\sqrt{\text{n.nodes}}\rfloor, 10)$ |
 | `-USRrev` | Number of USRrev moves per iteration | `100` |
 | `-USRrnd` | Number of USRrnd moves per iteration | `50` |
