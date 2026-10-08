@@ -1,5 +1,5 @@
 # Duetto
-Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet sampling** for sampling **directed acyclic graphs (DAGs)** from their posterior distribution. 
+Duetto implements **Markov chain Monte Carlo (MCMC)** moves based on **duet sampling** to draw from the posterior distribution of **directed acyclic graphs (DAGs)**. The underlying framework and moves are introduced in **Generalizing Metropolis--Hastings for Sampling DAGs**.
 
 ## Algorithm Overview
 Duetto implements three move types
@@ -9,7 +9,7 @@ Duetto implements three move types
 - **Ancestor-constrained move (AC):** Adds, removes, or reverses an ancestor relationship while resampling parent sets at its endpoints.
 - **[Blocked Gibbs sampling](https://www.jmlr.org/papers/v17/14-486.html) (BG):** standard Gibbs sampling (no duet sampling)
 
-A **score-pruning technique** can optionally be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
+The **score-pruning** technique, introduced in **[Scaling Up Bayesian DAG Sampling](https://proceedings.mlr.press/v337/nikzad26a.html)** (Nikzad et al.) can be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
 
 ## Compilation and Execution
 
