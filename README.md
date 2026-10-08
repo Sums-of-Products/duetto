@@ -49,7 +49,7 @@ Duetto computes scores only from discrete data using BDeu (ESS=1). We recommend 
 | `-burnin` | Number of burn-in iterations | `i / 10` |
 | `-q` | Block size | $\min(\lfloor\sqrt{\text{n.nodes}}\rfloor, 10)$ |
 | `-USRrev` | Number of USRrev moves per iteration | `100` |
-| `-USRrnd` | Number of USRnd moves per iteration | `50` |
+| `-USRrnd` | Number of USRrnd moves per iteration | `50` |
 | `-USRid` | Number of USRrev moves per iteration | `0` |
 | `-EC` | Number of EC moves per iteration | `25` |
 | `-AC` | Number of AC moves per iteration | `25` |
