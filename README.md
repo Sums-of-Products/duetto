@@ -11,7 +11,7 @@ Duetto implements four moves:
 - **Ancestor-constrained move (AC):** Adds, removes, or reverses an ancestor relationship while resampling parent sets at its endpoints.
 - **[Blocked Gibbs sampling](https://www.jmlr.org/papers/v17/14-486.html) (BG):** Jointly samples a block of parent sets from the full conditional DAG posterior (no duet sampling).
 
-Three variants of USR are implemented: **USRrev**, **USRrnd**, and USRid. The latter one falls within the standard Metropolis—Hastings framework; it performs poorly and is not recommended.
+Three variants of USR are implemented: **USRrev**, **USRrnd**, and USRid. The latter one falls within the standard Metropolis—Hastings framework; it is not recommended due to poor performance.
 
 USRid uses the standard Metropolis–Hastings algorithm, performs poorly, and is not recommended.
 
