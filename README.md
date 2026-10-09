@@ -40,7 +40,7 @@ Duetto computes scores only from discrete data using BDeu (ESS=1). We recommend 
 | Parameter | Description | Default |
 |-----------|-------------|---------|
 | `-K` | Top candidate parents per node | `0` (unrestricted) |
-| `-m` | Maximum in-degree per node | `4 4` The first value is for the parent sets containing the top K nodes, the second is for the others |
+| `-m` | Maximum in-degree per node | `4 4` The first value is for parent sets containing the top K nodes, the second is for the others |
 | `-p` | Structure prior: `0` uniform, `1` fair, `2` fair+, `-w` edge(w) | `1` |
 | `-P` | Score pruning mode: `0` none, `1` top-down, `2` bottom-up; if preceded by digit `k>0`, only up to `min{k, maxind}` parents | `2` |
 | `-a` | Number of significant bits in approximations | `10` |
