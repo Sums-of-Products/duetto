@@ -13,8 +13,6 @@ Duetto implements four moves:
 
 Three variants of USR are implemented: **USRrev**, **USRrnd**, and USRid. The latter one falls within the standard Metropolis—Hastings framework; it is not recommended due to poor performance.
 
-USRid uses the standard Metropolis–Hastings algorithm, performs poorly, and is not recommended.
-
 The **score-pruning** technique, introduced in **[Scaling Up Bayesian DAG Sampling](https://proceedings.mlr.press/v337/nikzad26a.html)** (Nikzad et al., 2026), can be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
 
 ## Compilation and Execution
