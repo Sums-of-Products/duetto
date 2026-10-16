@@ -15,13 +15,16 @@ Three variants of USR are implemented: **USRrev**, **USRrnd**, and USRid. The la
 
 The **score-pruning** technique, introduced in **[Scaling Up Bayesian DAG Sampling](https://proceedings.mlr.press/v337/nikzad26a.html)** (Nikzad et al., 2026), can be enabled to discard low-probability parent sets in the preprocessing phase, improving scalability and memory efficiency.
 
-## Compilation and Execution
+## Compilation
 
 Duetto is implemented in **C++** and can be compiled with **g++** as follows:
 
 ```bash
-g++ -std=c++17 -march=native -O3 -o duetto duetto.cpp
+g++ -std=c++20 -march=native -O3 -o duetto duetto.cpp
 ```
+This project requires the [Boost C++ Libraries](https://www.boost.org/). Ensure that the Boost header files are accessible to the compiler.
+
+## Execution
 
 The only mandatory parameter is the data file, which should contain data points as rows and features as columns. Alternatively, the data can be provided with the opposite orientation by using the `.csv` extension. The `.csv` extension is required for the file to be correctly interpreted with this orientation.
 
