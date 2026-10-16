@@ -5,7 +5,7 @@
 #include "Wsets.hpp"
 #include "BD.hpp"
 #include "Scorer.hpp"
-#include "Gibby.hpp"
+
 
 
 #include <iostream>

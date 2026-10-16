@@ -5,7 +5,7 @@
 #include "Wsets.hpp"
 #include "BD.hpp"
 #include "Scorer.hpp"
-#include "Gibby.hpp"
+
 
 //uniform_real_distribution<> uniform_dist(0.0, 1.0);
 

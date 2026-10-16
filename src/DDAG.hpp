@@ -35,7 +35,7 @@
 #include <stack>
 #include <memory>		// shared_ptr
 #include <random>
-#include "AMOcache.h"	// Currently the only dependence of other "own" implementations.
+
 
 typedef uint8_t				u8;
 typedef uint32_t			u32;
@@ -47,8 +47,6 @@ typedef std::vector<u64>	vu64;
 typedef std::vector<vint>	vvin;
 typedef std::string			string;
 
-#define amocache 		amos::amocache
-#define max_nelem		amos::maxsize // For AMOs.
 
 #define DDAG_DEBUG		false
 
@@ -132,7 +130,6 @@ class DDAG {
 		void checkP(int op, int j); 				// Does P correspond to A? For debugging.
 
 		void compute_nbr();							// Part 1 of req(); Chickering's (1995) algorithm for DAG to CPDAG.
-		void generate_amo();						// Part 2 of req(); generates an orientation of the undirected arcs.
 };
 
 using DDAG_ptr = std::shared_ptr<DDAG>;				// A typedef.
@@ -380,7 +377,6 @@ void DDAG::turn_dynamic(){
 // 
 void DDAG::req(){
 	compute_nbr();
-	generate_amo();
 }
 
 void DDAG::printA(){
@@ -608,98 +604,7 @@ void DDAG::compute_nbr(){
 	}	
 }
 
-void DDAG::generate_amo(){
-	using namespace std;
-	// Generate the data structure, unless already done. 
-	amocache.gen_amos();
-	// Visit each component, as specified by relation nbr. 
-	vboo mark(n);
-	vcha mask(n);
-	vint S(n);
-	deque<int> q;
-	vcha turn(n, 0);		// Could also reuse mask.
-	vint toC; toC.reserve(8);
-	vint toP; toP.reserve(8);
-	for (int j = 0; j < n; j++){
-		if (mark[j] || nbr[j].size() == 0) continue;
-		// Get the component S of j. 
-		mark[j] = true;
-		S.clear();
-		q.clear();
-		q.push_back(j);
-		int v = j;
-		while (!q.empty()){
-			v = q.front(); q.pop_front();
-			S.push_back(v);
-			for (const int u : nbr[v]) if (!mark[u]){ q.push_back(u); mark[u] = true; }
-		}
-		// Handle the component.					
-		int nelem = S.size(); uccgsizes[std::min(255, nelem)]++;
-		if (nelem > max_nelem) continue; // Currently do nothing for large components.
-		if (nelem == 2) { // An important special case, merits tailored handling.
-			int x = S[0], y = S[1]; // Either keep the current direction or reverse.
-			if (rint(1)) continue; // No change, with probability 50%.
-			if (arc(x, y)){ // Reverse into y->x.
-				rem_ord(x, P[y]); rem_ord(y, C[x]);
-				add_ord(x, C[y]); add_ord(y, P[x]);
-			} else { // Reverse into x->y.
-				rem_ord(x, C[y]); rem_ord(y, P[x]);
-				add_ord(x, P[y]); add_ord(y, C[x]);
-			}
-			flip(A, x, y); flip(A, y, x);
-			continue;
-		}
-		
-		u8 mt = 1;
-		for (int t = 0; t < nelem; t++){ mask[S[t]] = mt; mt <<= 1; }
-		u8 row[8] = { 0 };
-		for (int t = 1; t < nelem; t++){
-			for (auto u : nbr[S[t]]) row[t] |= mask[u];
-		}
-		// Now row[] contains the adjacency matrix of the component.
-	
-		// Get the short code, i.e., the index of the UCCG.	Not maximally optimized. Note: depends on max_nelem.
-		u32 uccg;
-		uccg  = (row[1] & 0x01);
-		uccg |= (row[2] & 0x03) <<  1;
-		uccg |= (row[3] & 0x07) <<  3;
-		uccg |= (row[4] & 0x0F) <<  6;
-		uccg |= (row[5] & 0x1F) << 10;
-		uccg |= (row[6] & 0x3F) << 15;
-		
-		// Replace the UCCG by a random AMO.
 
-		int amoc = amocache.amos_count(nelem, uccg);
-		int rind = rint(amoc - 1);
-		u32 H = amocache.get_amo(nelem, uccg, rind);
-			
-		// Read off from the AMO H the implied changes to the parent set P[y] and child set C[y] of each y.
-		// 	First, in turn[], label each undirected arc {x, y} in S by 0 (keep direction) and 1 (reverse).
-		// 	Second, for each y, make change lists toC and toP based on labels, in increasing order by node.
-					
-		// Label.
-		for (int t = 1; t < nelem; t++){
-			int y = S[t];
-			for (int s = 0; s < t; s++, H >>= 1){
-				int x = S[s];
-				int b = ((int) arc(x, y)) ^ (H & 1);
-				turn[x] |= (b << t); turn[y] |= (b << s);
-			}
-		}	
-		// Change. Remember that each arc (x, y) is represented *twice*, x in P[y] and y in C[x].
-		for (int t = 0; t < nelem; t++){
-			int y = S[t];
-			toC.clear();
-			for (auto x : P[y]) if (turn[x] & (1 << t)){ toC.push_back(x); flip(A, y, x); }
-			toP.clear();
-			for (auto x : C[y]) if (turn[x] & (1 << t)){ toP.push_back(x); flip(A, y, x); }
-			vrem_ord(toC, P[y]); vrem_ord(toP, C[y]);					
-			vadd_ord(toP, P[y]); vadd_ord(toC, C[y]);			
-		}
-		for (auto x : S) turn[x] = 0;			
-	}
-	if (dyn) turn_dynamic();	
-}
 
 #undef at
 #undef bm
